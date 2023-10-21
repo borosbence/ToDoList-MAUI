@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TeendokLista.MAUI.ViewModels"
+             x:Class="ToDoList.MAUI.Views.MainPage"
+             Title="Jegyzetek">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Új +" IconImageSource="add.png"
+                    Order="Primary" Priority="0"
+                    Command="{Binding AddItemCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ScrollView>
+        <FlexLayout Wrap="Wrap"
+                AlignItems="Start"
+                AlignContent="Start"
+                BindableLayout.ItemsSource="{Binding Tasks}"
+                BindableLayout.ItemTemplate="{StaticResource ToDoListTmp}">
+        </FlexLayout>
+    </ScrollView>
+
+</ContentPage>

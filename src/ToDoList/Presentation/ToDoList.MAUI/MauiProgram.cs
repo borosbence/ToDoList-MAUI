@@ -1,5 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
-using ToDoList.MAUI.Data;
+using TeendokLista.MAUI.ViewModels;
+using ToDoList.Application.Handlers;
+using ToDoList.Application.Repositories;
+using ToDoList.Domain.Entities;
+using ToDoList.MAUI.Views;
 
 namespace ToDoList.MAUI
 {
@@ -13,16 +17,22 @@ namespace ToDoList.MAUI
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-            builder.Services.AddMauiBlazorWebView();
-
 #if DEBUG
-		builder.Services.AddBlazorWebViewDeveloperTools();
 		builder.Logging.AddDebug();
 #endif
-
-            builder.Services.AddSingleton<WeatherForecastService>();
+            // TODO: read from appsettings
+            const string apiKey = "B3AAC4FA-2ACA-4040-AEC6-55FE96F4F31D";
+            builder.Services.AddTransient<IGenericRepository<ToDoTask>, GenericAPIRepository<ToDoTask>>(x =>
+            {
+                return new("api/Tasks", new ApiKeyAuthHandler(apiKey));
+            });
+            builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<TaskDetailViewModel>();
+            builder.Services.AddTransient<TaskDetailPage>();
 
             return builder.Build();
         }

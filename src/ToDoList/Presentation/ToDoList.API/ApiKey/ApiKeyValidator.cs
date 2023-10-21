@@ -15,12 +15,12 @@
 
         public bool IsValid(string? userApiKey)
         {
-            const string apiKeyName = "ApiKey";
+            const string API_KEY_NAME = "ApiKey";
             if (string.IsNullOrWhiteSpace(userApiKey))
             {
                 return false;
             }
-            string? apiKey = _configuration.GetValue<string>(apiKeyName);
+            string? apiKey = _configuration.GetValue<string>(API_KEY_NAME);
             if (apiKey == null || apiKey != userApiKey)
             {
                 return false;

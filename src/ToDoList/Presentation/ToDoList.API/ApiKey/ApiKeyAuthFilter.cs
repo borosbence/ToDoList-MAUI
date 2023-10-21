@@ -14,8 +14,8 @@ namespace ToDoList.API.ApiKey
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            const string apiKeyHeaderName = "X-API-Key";
-            string? userApiKey = context.HttpContext.Request.Headers[apiKeyHeaderName];
+            const string API_KEY_HEADERNAME = "X-API-Key";
+            string? userApiKey = context.HttpContext.Request.Headers[API_KEY_HEADERNAME];
             if (!_apiKeyValidator.IsValid(userApiKey))
             {
                 context.Result = new UnauthorizedResult();

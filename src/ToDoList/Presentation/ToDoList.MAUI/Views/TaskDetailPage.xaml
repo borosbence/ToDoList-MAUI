@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDoList.MAUI.Views.TaskDetailPage"
+             Title="Részletek" 
+             Style="{StaticResource detailsPage}">
+    <ScrollView>
+        <VerticalStackLayout Margin="10">
+            <VerticalStackLayout.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="VerticalOptions" Value="Center" />
+                </Style>
+                <Style TargetType="HorizontalStackLayout">
+                    <Setter Property="Spacing" Value="10" />
+                </Style>
+            </VerticalStackLayout.Resources>
+
+            <HorizontalStackLayout>
+                <Label>Azonosító:</Label>
+                <Label Text="{Binding Task.Id, Mode=OneWay}"/>
+            </HorizontalStackLayout>
+
+            <Entry Placeholder="Cím" Text="{Binding Task.Title}" Style="{StaticResource titleStyle}"/>
+            <Editor Placeholder="Tartalom" Text="{Binding Task.Content}" Style="{StaticResource contentStyle}" />
+
+            <HorizontalStackLayout>
+                <Label>Határidő:</Label>
+                <DatePicker Date="{Binding Task.DeadLine, TargetNullValue=''}" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label>Teljesítve:</Label>
+                <CheckBox IsChecked="{Binding Task.IsCompleted}" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Button Text="Mentés" ImageSource="save.png" HorizontalOptions="Start"
+                        Style="{StaticResource btnStyle}"
+                        Command="{Binding SaveCommand }">
+                </Button>
+                <Button Text="Törlés" ImageSource="trash.png" HorizontalOptions="End"
+                        Background="Red" Style="{StaticResource btnStyle}"
+                        Command="{Binding DeleteCommand}">
+                </Button>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
