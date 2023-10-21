@@ -1,8 +1,9 @@
 ﻿using System.Net.Http.Json;
+using ToDoList.Domain.Entities;
 
 namespace ToDoList.Application.Repositories
 {
-    public class GenericAPIRepository<T> : ApiRepositoryBase, IGenericRepository<T>
+    public class GenericAPIRepository<T> : ApiRepositoryBase, IGenericRepository<T> where T : IEntity
     {
         public GenericAPIRepository(string path, DelegatingHandler handler, string? baseUrl = null) : base(path, handler, baseUrl)
         {
@@ -24,9 +25,11 @@ namespace ToDoList.Application.Repositories
             return result.IsSuccessStatusCode;
         }
 
-        public async Task InsertAsync(T entity)
+        public async Task<int> InsertAsync(T entity)
         {
-            await client.PostAsJsonAsync(_path, entity);
+            var result = await client.PostAsJsonAsync(_path, entity);
+            var newEntity = await result.Content.ReadFromJsonAsync<T>();
+            return newEntity?.Id ?? 0;
         }
 
         public async Task UpdateAsync(int id, T entity)

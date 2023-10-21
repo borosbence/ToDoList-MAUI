@@ -17,20 +17,22 @@
 
             <HorizontalStackLayout>
                 <Label>Azonosító:</Label>
-                <Label Text="{Binding Task.Id, Mode=OneWay}"/>
+                <Label Text="{Binding ToDoTask.Id, Mode=OneWay}"/>
             </HorizontalStackLayout>
 
-            <Entry Placeholder="Cím" Text="{Binding Task.Title}" Style="{StaticResource titleStyle}"/>
-            <Editor Placeholder="Tartalom" Text="{Binding Task.Content}" Style="{StaticResource contentStyle}" />
+            <Entry Placeholder="Cím" Text="{Binding ToDoTask.Title}" Style="{StaticResource titleStyle}"/>
+            <Editor Placeholder="Tartalom" Text="{Binding ToDoTask.Content}" Style="{StaticResource contentStyle}" />
 
             <HorizontalStackLayout>
                 <Label>Határidő:</Label>
-                <DatePicker Date="{Binding Task.DeadLine, TargetNullValue=''}" VerticalOptions="Center"/>
+                <CheckBox IsChecked="{Binding HasDeadLine}" VerticalOptions="Center"/>
+                <DatePicker Date="{Binding ToDoTask.DeadLine}" VerticalOptions="Center" 
+                            IsEnabled="{Binding HasDeadLine}" IsVisible="{Binding HasDeadLine}"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label>Teljesítve:</Label>
-                <CheckBox IsChecked="{Binding Task.IsCompleted}" VerticalOptions="Center"/>
+                <CheckBox IsChecked="{Binding ToDoTask.IsCompleted}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>

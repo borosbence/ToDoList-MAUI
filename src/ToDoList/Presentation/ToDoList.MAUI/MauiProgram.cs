@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using TeendokLista.MAUI.ViewModels;
 using ToDoList.Application.Handlers;
 using ToDoList.Application.Repositories;
-using ToDoList.Domain.Entities;
+using ToDoList.MAUI.Models;
+using ToDoList.MAUI.ViewModels;
 using ToDoList.MAUI.Views;
 
 namespace ToDoList.MAUI
@@ -23,9 +23,8 @@ namespace ToDoList.MAUI
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
-            // TODO: read from appsettings
             const string apiKey = "B3AAC4FA-2ACA-4040-AEC6-55FE96F4F31D";
-            builder.Services.AddTransient<IGenericRepository<ToDoTask>, GenericAPIRepository<ToDoTask>>(x =>
+            builder.Services.AddTransient<IGenericRepository<ToDoTaskModel>, GenericAPIRepository<ToDoTaskModel>>(x =>
             {
                 return new("api/Tasks", new ApiKeyAuthHandler(apiKey));
             });

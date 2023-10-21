@@ -1,47 +1,57 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using System.Collections.ObjectModel;
 using ToDoList.Application.Repositories;
-using ToDoList.Domain.Entities;
+using ToDoList.MAUI.Messages;
+using ToDoList.MAUI.Models;
 using ToDoList.MAUI.Views;
 
-namespace TeendokLista.MAUI.ViewModels
+namespace ToDoList.MAUI.ViewModels
 {
     public partial class MainViewModel : ObservableObject
     {
-        private readonly IGenericRepository<ToDoTask> _repository;
+        private readonly IGenericRepository<ToDoTaskModel> _repository;
 
-        public MainViewModel(IGenericRepository<ToDoTask> repository)
+        public MainViewModel(IGenericRepository<ToDoTaskModel> repository)
         {
             _repository = repository;
-            Tasks = new ObservableCollection<ToDoTask>();
+            Tasks = new ObservableCollection<ToDoTaskModel>();
             RegisterUpdate();
         }
 
-        public ObservableCollection<ToDoTask> Tasks { get; set; }
+        public ObservableCollection<ToDoTaskModel> Tasks { get; set; }
 
+        public bool IsFirstLoad { get; set; } = true;
         public async Task LoadData()
         {
             Tasks.Clear();
             var result = await _repository.GetAllAsync();
             result.ForEach(Tasks.Add);
+            IsFirstLoad = false;
         }
 
         private void RegisterUpdate()
         {
-            // TODO: regisztrálás
-            //MessagingCenter.Subscribe<TaskDetailViewModel, ToDoTask>(this, "UpdateView", async (sender, feladat) =>
-            //{
-            //    await LoadData();
-            //});
+            WeakReferenceMessenger.Default.Register<MainPageMessage>(this, (r, m) =>
+            {
+                if (m.Value.Action == ToDoAction.Add)
+                {
+                    Tasks.Add(m.Value.Data);
+                }
+                else if (m.Value.Action == ToDoAction.Delete)
+                {
+                    Tasks.Remove(m.Value.Data);
+                }
+            });
         }
 
         [RelayCommand]
-        private async Task ShowItemAsync(ToDoTask task)
+        private async Task ShowItemAsync(ToDoTaskModel todoTask)
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Details", task }
+                { "Details", todoTask }
             };
             await Shell.Current.GoToAsync(nameof(TaskDetailPage), navigationParameter);
         }
@@ -51,7 +61,7 @@ namespace TeendokLista.MAUI.ViewModels
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Details", new ToDoTask() }
+                { "Details", new ToDoTaskModel() }
             };
             await Shell.Current.GoToAsync(nameof(TaskDetailPage), navigationParameter);
         }

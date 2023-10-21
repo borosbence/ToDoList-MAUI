@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:ToDoList.Domain.Entities;assembly=ToDoList.Domain"
-             xmlns:vm="clr-namespace:TeendokLista.MAUI.ViewModels"
+             xmlns:model="clr-namespace:ToDoList.MAUI.Models"
+             xmlns:vm="clr-namespace:ToDoList.MAUI.ViewModels"
              x:Class="TeendokLista.MAUI.Resources.ListTemplate">
 
-    <DataTemplate x:Key="ToDoListTmp" x:DataType="model:ToDoTask">
+    <DataTemplate x:Key="ToDoListTmp" x:DataType="model:ToDoTaskModel">
         <AbsoluteLayout>
             <Grid>
                 <Grid.GestureRecognizers>

@@ -1,4 +1,4 @@
-﻿using TeendokLista.MAUI.ViewModels;
+﻿using ToDoList.MAUI.ViewModels;
 
 namespace ToDoList.MAUI.Views
 {
@@ -16,7 +16,10 @@ namespace ToDoList.MAUI.Views
         {
             try
             {
-                await _vm.LoadData();
+                if (_vm.IsFirstLoad)
+                {
+                    await _vm.LoadData();
+                }
             }
             catch (Exception ex)
             {

@@ -1,4 +1,4 @@
-using TeendokLista.MAUI.ViewModels;
+using ToDoList.MAUI.ViewModels;
 
 namespace ToDoList.MAUI.Views;
 

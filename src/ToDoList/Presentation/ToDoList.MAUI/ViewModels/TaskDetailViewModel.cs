@@ -1,52 +1,64 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.Messaging;
 using ToDoList.Application.Repositories;
-using ToDoList.Domain.Entities;
-using ToDoList.MAUI.Views;
+using ToDoList.MAUI.Messages;
+using ToDoList.MAUI.Models;
 
-namespace TeendokLista.MAUI.ViewModels
+namespace ToDoList.MAUI.ViewModels
 {
-    [QueryProperty(nameof(Task), "Details")]
+    [QueryProperty("ToDoTask", "Details")]
     public partial class TaskDetailViewModel : ObservableObject
     {
-        private readonly IGenericRepository<ToDoTask> _repository;
+        private readonly IGenericRepository<ToDoTaskModel> _repository;
 
-        public TaskDetailViewModel(IGenericRepository<ToDoTask> repository)
+        public TaskDetailViewModel(IGenericRepository<ToDoTaskModel> repository)
         {
             _repository = repository;
         }
 
-        // TODO: model osztályon is notify
         [ObservableProperty]
-        private ToDoTask _task;
+        private bool _hasDeadLine;
+
+        private ToDoTaskModel _toDoTask;
+        public ToDoTaskModel ToDoTask
+        {
+            get { return _toDoTask; }
+            set { 
+                SetProperty(ref _toDoTask, value);
+                HasDeadLine = ToDoTask.DeadLine != null;
+            }
+        }
 
         [RelayCommand]
         private async Task SaveAsync()
         {
-            bool letezik = await _repository.ExistsByIdAsync(Task.Id);
-            if (letezik)
+            bool exists = await _repository.ExistsByIdAsync(ToDoTask.Id);
+            if (exists)
             {
-                await _repository.UpdateAsync(Task.Id, Task);
+                await _repository.UpdateAsync(ToDoTask.Id, ToDoTask);
             }
             else
             {
-                await _repository.InsertAsync(Task);
+                int newId = await _repository.InsertAsync(ToDoTask);
+                ToDoTask.Id = newId;
+                WeakReferenceMessenger.Default.Send(new MainPageMessage(new ToDoTaskMessage(ToDoTask)));
             }
-            // TODO: csere
-            MessagingCenter.Send(this, "UpdateView", Task);
-            await Shell.Current.GoToAsync(nameof(MainPage));
+            await Shell.Current.GoToAsync("..");
         }
 
         [RelayCommand]
         private async Task DeleteAsync()
         {
-            bool letezik = await _repository.ExistsByIdAsync(Task.Id);
-            if (letezik)
+            bool exists = await _repository.ExistsByIdAsync(ToDoTask.Id);
+            if (exists)
             {
-                await _repository.DeleteAsync(Task.Id);
+                await _repository.DeleteAsync(ToDoTask.Id);
             }
-            MessagingCenter.Send(this, "UpdateView", Task);
-            await Shell.Current.GoToAsync(nameof(MainPage));
+            WeakReferenceMessenger.Default.Send(new MainPageMessage(new ToDoTaskMessage(ToDoTask, ToDoAction.Delete)));
+            await Shell.Current.GoToAsync("..");
         }
+
+        // TODO: visszanyíl előtt mentsen
     }
 }
