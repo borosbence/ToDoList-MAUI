@@ -3,20 +3,20 @@ using ToDoList.MAUI.Models;
 
 namespace ToDoList.MAUI.Messages
 {
-    public enum ToDoAction
+    public enum ListAction
     {
         Add,
         Delete
     }
     public class ToDoTaskMessage
     {
-        public ToDoTaskMessage(ToDoTaskModel data, ToDoAction action = ToDoAction.Add)
+        public ToDoTaskMessage(ToDoTaskModel data, ListAction action = ListAction.Add)
         {
             Data = data;
             Action = action;
         }
         public ToDoTaskModel Data { get; set; }
-        public ToDoAction Action { get; set; }
+        public ListAction Action { get; set; }
     }
     public class MainPageMessage : ValueChangedMessage<ToDoTaskMessage>
     {

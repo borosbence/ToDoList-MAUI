@@ -63,11 +63,11 @@ namespace ToDoList.MAUI.ViewModels
         {
             WeakReferenceMessenger.Default.Register<MainPageMessage>(this, (r, m) =>
             {
-                if (m.Value.Action == ToDoAction.Add && m.Value.Data.Id > 0)
+                if (m.Value.Action == ListAction.Add && m.Value.Data.Id > 0)
                 {
                     Tasks.Add(m.Value.Data);
                 }
-                else if (m.Value.Action == ToDoAction.Delete)
+                else if (m.Value.Action == ListAction.Delete)
                 {
                     Tasks.Remove(m.Value.Data);
                 }

@@ -61,7 +61,7 @@ namespace ToDoList.MAUI.ViewModels
             {
                 await _repository.DeleteAsync(ToDoTask.Id);
             }
-            WeakReferenceMessenger.Default.Send(new MainPageMessage(new ToDoTaskMessage(ToDoTask, ToDoAction.Delete)));
+            WeakReferenceMessenger.Default.Send(new MainPageMessage(new ToDoTaskMessage(ToDoTask, ListAction.Delete)));
             await Shell.Current.GoToAsync("..");
         }
 
