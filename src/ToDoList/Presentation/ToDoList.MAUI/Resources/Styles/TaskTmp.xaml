@@ -8,12 +8,12 @@
     </Style>-->
 
     <Style x:Key="titleStyle" TargetType="Entry">
-        <Setter Property="FontSize" Value="16" />
+        <Setter Property="FontSize" Value="18" />
         <Setter Property="FontAttributes" Value="Bold,Italic" />
         <Setter Property="TextColor" Value="Black" />
     </Style>
     <Style x:Key="contentStyle" TargetType="Editor">
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="16" />
         <Setter Property="HeightRequest" Value="250" />
         <Setter Property="AutoSize" Value="TextChanges" />
         <Setter Property="TextColor" Value="Black" />

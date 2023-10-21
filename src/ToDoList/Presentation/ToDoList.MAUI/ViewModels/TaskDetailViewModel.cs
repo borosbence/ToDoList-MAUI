@@ -20,6 +20,9 @@ namespace ToDoList.MAUI.ViewModels
         [ObservableProperty]
         private bool _hasDeadLine;
 
+        [ObservableProperty]
+        private string _pageTitle;
+
         private ToDoTaskModel _toDoTask;
         public ToDoTaskModel ToDoTask
         {
@@ -28,6 +31,7 @@ namespace ToDoList.MAUI.ViewModels
             {
                 SetProperty(ref _toDoTask, value);
                 HasDeadLine = ToDoTask.DeadLine != null;
+                PageTitle = ToDoTask.Id == 0 ? "Új jegyzet" : "Jegyzet módosítása";
             }
         }
 

@@ -22,7 +22,8 @@ namespace ToDoList.MAUI.ViewModels
 
         public ObservableCollection<ToDoTaskModel> Tasks { get; set; }
         public bool IsFirstLoad { get; set; } = true;
-        public bool IsRefreshing { get; set; }
+        [ObservableProperty]
+        private bool _isRefreshing;
 
         [RelayCommand]
         private async Task LoadDataAsync()
@@ -31,10 +32,11 @@ namespace ToDoList.MAUI.ViewModels
             {
                 IsRefreshing = true;
             }
-            Tasks.Clear();
             var result = await _repository.GetAllAsync();
+            Tasks.Clear();
             result.ForEach(Tasks.Add);
             IsFirstLoad = false;
+            IsRefreshing = false;
         }
 
         [RelayCommand]
@@ -61,7 +63,7 @@ namespace ToDoList.MAUI.ViewModels
         {
             WeakReferenceMessenger.Default.Register<MainPageMessage>(this, (r, m) =>
             {
-                if (m.Value.Action == ToDoAction.Add)
+                if (m.Value.Action == ToDoAction.Add && m.Value.Data.Id > 0)
                 {
                     Tasks.Add(m.Value.Data);
                 }

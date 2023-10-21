@@ -89,4 +89,8 @@
 	  <Folder Include="Resources\Raw\" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <MauiImage Include="Resources\AppIcon\appicon.png" />
+	</ItemGroup>
+
 </Project>
