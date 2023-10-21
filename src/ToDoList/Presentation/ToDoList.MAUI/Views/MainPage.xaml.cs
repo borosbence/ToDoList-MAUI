@@ -18,7 +18,7 @@ namespace ToDoList.MAUI.Views
             {
                 if (_vm.IsFirstLoad)
                 {
-                    await _vm.LoadData();
+                    await _vm.LoadDataCommand.ExecuteAsync(null);
                 }
             }
             catch (Exception ex)

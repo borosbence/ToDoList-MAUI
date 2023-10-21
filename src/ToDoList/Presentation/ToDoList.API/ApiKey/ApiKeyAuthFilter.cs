@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ToDoList.API.ApiKey
 {
@@ -19,7 +19,7 @@ namespace ToDoList.API.ApiKey
             if (!_apiKeyValidator.IsValid(userApiKey))
             {
                 context.Result = new UnauthorizedResult();
-            }  
+            }
         }
     }
 }

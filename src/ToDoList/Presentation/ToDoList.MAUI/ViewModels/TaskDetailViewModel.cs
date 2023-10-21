@@ -24,7 +24,8 @@ namespace ToDoList.MAUI.ViewModels
         public ToDoTaskModel ToDoTask
         {
             get { return _toDoTask; }
-            set { 
+            set
+            {
                 SetProperty(ref _toDoTask, value);
                 HasDeadLine = ToDoTask.DeadLine != null;
             }
@@ -36,6 +37,7 @@ namespace ToDoList.MAUI.ViewModels
             bool exists = await _repository.ExistsByIdAsync(ToDoTask.Id);
             if (exists)
             {
+                ToDoTask.ModifiedDate = DateTime.Now;
                 await _repository.UpdateAsync(ToDoTask.Id, ToDoTask);
             }
             else

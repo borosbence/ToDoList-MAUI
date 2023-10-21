@@ -4,7 +4,6 @@
              xmlns:model="clr-namespace:ToDoList.MAUI.Models"
              xmlns:vm="clr-namespace:ToDoList.MAUI.ViewModels"
              x:Class="TeendokLista.MAUI.Resources.ListTemplate">
-
     <DataTemplate x:Key="ToDoListTmp" x:DataType="model:ToDoTaskModel">
         <AbsoluteLayout>
             <Grid>
@@ -38,8 +37,10 @@
                     </Rectangle.Style>
                 </Rectangle>
                 <VerticalStackLayout WidthRequest="140" HeightRequest="140" Spacing="5">
-                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1" />
-                    <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="5"/>
+                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1"
+                           TextColor="Black"/>
+                    <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="5"
+                           TextColor="Black"/>
                 </VerticalStackLayout>
             </Grid>
         </AbsoluteLayout>

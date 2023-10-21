@@ -21,32 +21,33 @@ namespace ToDoList.API.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ToDoTask>>> GetAllTasks()
         {
-            return await _context.Tasks.ToListAsync();
+            return await _context.Tasks.OrderByDescending(x => x.ModifiedDate).ToListAsync();
         }
 
         // GET: api/Tasks/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ToDoTask>> GetTask(int id)
         {
-            var task = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == id);
-            if (task == null)
+            var todoTask = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == id);
+            if (todoTask == null)
             {
                 return NotFound();
             }
-            return task;
+            return todoTask;
         }
 
         // PUT: api/Tasks/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTask(int id, ToDoTask task)
+        public async Task<IActionResult> PutTask(int id, ToDoTask todoTask)
         {
-            if (id != task.Id)
+            if (id != todoTask.Id)
             {
                 return BadRequest();
             }
-            _context.Entry(task).State = EntityState.Modified;
+            _context.Entry(todoTask).State = EntityState.Modified;
             try
             {
+                // task.ModifiedDate = DateTime.Now;
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -65,23 +66,23 @@ namespace ToDoList.API.Controllers
 
         // POST: api/Tasks
         [HttpPost]
-        public async Task<ActionResult<ToDoTask>> PostTask(ToDoTask task)
+        public async Task<ActionResult<ToDoTask>> PostTask(ToDoTask todoTask)
         {
-            _context.Tasks.Add(task);
+            _context.Tasks.Add(todoTask);
             await _context.SaveChangesAsync();
-            return CreatedAtAction("GetTask", new { id = task.Id }, task);
+            return CreatedAtAction("GetTask", new { id = todoTask.Id }, todoTask);
         }
 
         // DELETE: api/Tasks/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTask(int id)
         {
-            var task = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == id);
-            if (task == null)
+            var todoTask = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == id);
+            if (todoTask == null)
             {
                 return NotFound();
             }
-            _context.Tasks.Remove(task);
+            _context.Tasks.Remove(todoTask);
             await _context.SaveChangesAsync();
             return NoContent();
         }

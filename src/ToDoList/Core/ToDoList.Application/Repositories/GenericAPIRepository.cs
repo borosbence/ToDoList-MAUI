@@ -5,7 +5,7 @@ namespace ToDoList.Application.Repositories
 {
     public class GenericAPIRepository<T> : ApiRepositoryBase, IGenericRepository<T> where T : IEntity
     {
-        public GenericAPIRepository(string path, DelegatingHandler handler, string? baseUrl = null) : base(path, handler, baseUrl)
+        public GenericAPIRepository(string baseUrl, string path, DelegatingHandler handler) : base(baseUrl, path, handler)
         {
         }
 

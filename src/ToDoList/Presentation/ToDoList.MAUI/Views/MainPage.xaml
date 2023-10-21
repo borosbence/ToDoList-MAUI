@@ -5,17 +5,22 @@
              x:Class="ToDoList.MAUI.Views.MainPage"
              Title="Jegyzetek">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Új +" IconImageSource="add.png"
-                    Order="Primary" Priority="0"
-                    Command="{Binding AddItemCommand}"/>
+        <ToolbarItem Text="Új" IconImageSource="add.png"
+                     Order="Primary" Priority="0"
+                     Command="{Binding AddItemCommand}"/>
+        <ToolbarItem Text="Frissítés" IconImageSource="refresh.png"
+                     Order="Primary" Priority="1"
+                     Command="{Binding LoadDataCommand}"/>
     </ContentPage.ToolbarItems>
-    <ScrollView>
-        <FlexLayout Wrap="Wrap"
-                AlignItems="Start"
-                AlignContent="Start"
-                BindableLayout.ItemsSource="{Binding Tasks}"
-                BindableLayout.ItemTemplate="{StaticResource ToDoListTmp}">
-        </FlexLayout>
-    </ScrollView>
+    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadDataCommand}">
+        <ScrollView>
+            <FlexLayout Wrap="Wrap"
+                    AlignItems="Start"
+                    AlignContent="Start"
+                    BindableLayout.ItemsSource="{Binding Tasks}"
+                    BindableLayout.ItemTemplate="{StaticResource ToDoListTmp}">
+            </FlexLayout>
+        </ScrollView>
+    </RefreshView>
 
 </ContentPage>

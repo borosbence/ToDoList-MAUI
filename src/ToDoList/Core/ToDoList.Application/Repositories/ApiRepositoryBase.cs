@@ -8,12 +8,10 @@ namespace ToDoList.Application.Repositories
         protected string _path;
         protected HttpClient client;
 
-        public ApiRepositoryBase(string path, DelegatingHandler handler, string? baseUrl = null)
+        public ApiRepositoryBase(string baseUrl, string path, DelegatingHandler handler)
         {
-            // TODO: read from appsettings
-            _baseUrl = baseUrl ?? "http://localhost:5000/";
+            _baseUrl = baseUrl;
             _path = path;
-
             client = new HttpClient(handler)
             {
                 BaseAddress = new Uri(_baseUrl)

@@ -21,29 +21,20 @@ namespace ToDoList.MAUI.ViewModels
         }
 
         public ObservableCollection<ToDoTaskModel> Tasks { get; set; }
-
         public bool IsFirstLoad { get; set; } = true;
-        public async Task LoadData()
+        public bool IsRefreshing { get; set; }
+
+        [RelayCommand]
+        private async Task LoadDataAsync()
         {
+            if (!IsFirstLoad)
+            {
+                IsRefreshing = true;
+            }
             Tasks.Clear();
             var result = await _repository.GetAllAsync();
             result.ForEach(Tasks.Add);
             IsFirstLoad = false;
-        }
-
-        private void RegisterUpdate()
-        {
-            WeakReferenceMessenger.Default.Register<MainPageMessage>(this, (r, m) =>
-            {
-                if (m.Value.Action == ToDoAction.Add)
-                {
-                    Tasks.Add(m.Value.Data);
-                }
-                else if (m.Value.Action == ToDoAction.Delete)
-                {
-                    Tasks.Remove(m.Value.Data);
-                }
-            });
         }
 
         [RelayCommand]
@@ -64,6 +55,21 @@ namespace ToDoList.MAUI.ViewModels
                 { "Details", new ToDoTaskModel() }
             };
             await Shell.Current.GoToAsync(nameof(TaskDetailPage), navigationParameter);
+        }
+
+        private void RegisterUpdate()
+        {
+            WeakReferenceMessenger.Default.Register<MainPageMessage>(this, (r, m) =>
+            {
+                if (m.Value.Action == ToDoAction.Add)
+                {
+                    Tasks.Add(m.Value.Data);
+                }
+                else if (m.Value.Action == ToDoAction.Delete)
+                {
+                    Tasks.Remove(m.Value.Data);
+                }
+            });
         }
     }
 }
