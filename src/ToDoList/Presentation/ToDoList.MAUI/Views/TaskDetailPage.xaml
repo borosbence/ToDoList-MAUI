@@ -4,23 +4,14 @@
              x:Class="ToDoList.MAUI.Views.TaskDetailPage"
              Title="{Binding PageTitle}" 
              Style="{StaticResource detailsPage}">
-    <ContentPage.Resources>
-        <Style TargetType="DatePicker">
-            <Setter Property="TextColor" Value="Black" />
-        </Style>
-        <Style TargetType="CheckBox">
-            <Setter Property="Color" Value="Black" />
-        </Style>
-    </ContentPage.Resources>
-    <ScrollView>
+    <ScrollView Orientation="Both">
         <VerticalStackLayout Margin="10">
             <VerticalStackLayout.Resources>
                 <Style TargetType="Label">
-                    <Setter Property="VerticalOptions" Value="Center" />
-                    <Setter Property="TextColor" Value="Black" />
+                    <Setter Property="VerticalOptions" Value="Center"/>
                 </Style>
                 <Style TargetType="HorizontalStackLayout">
-                    <Setter Property="Spacing" Value="10" />
+                    <Setter Property="Spacing" Value="10"/>
                 </Style>
             </VerticalStackLayout.Resources>
 
@@ -34,20 +25,29 @@
 
             <HorizontalStackLayout>
                 <Label>Határidő:</Label>
-                <CheckBox IsChecked="{Binding HasDeadLine}" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding HasDeadLine}" VerticalOptions="Center"/>
                 <DatePicker Date="{Binding ToDoTask.DeadLine}" VerticalOptions="Center" 
                             IsEnabled="{Binding HasDeadLine}" IsVisible="{Binding HasDeadLine}"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label>Teljesítve:</Label>
-                <CheckBox IsChecked="{Binding ToDoTask.IsCompleted}" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding ToDoTask.IsCompleted}" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout>
+                <Label>Létrehozás dátuma:</Label>
+                <Label Text="{Binding ToDoTask.CreatedDate, Mode=OneWay}"/>
+            </HorizontalStackLayout>
+            <HorizontalStackLayout Margin="0,5,0,10">
+                <Label>Utoljára módosítva:</Label>
+                <Label Text="{Binding ToDoTask.ModifiedDate, Mode=OneWay}"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Button Text="Mentés" ImageSource="save.png" HorizontalOptions="Start"
                         Style="{StaticResource btnStyle}"
-                        Command="{Binding SaveCommand }">
+                        Command="{Binding SaveCommand}">
                 </Button>
                 <Button Text="Törlés" ImageSource="trash.png" HorizontalOptions="End"
                         Background="Red" Style="{StaticResource btnStyle}"

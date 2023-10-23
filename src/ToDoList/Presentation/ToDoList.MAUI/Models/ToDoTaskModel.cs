@@ -16,8 +16,8 @@ namespace ToDoList.MAUI.Models
         [ObservableProperty]
         private bool _isCompleted;
         [ObservableProperty]
-        private DateTime _createdDate;
+        private DateTime _createdDate = DateTime.Now;
         [ObservableProperty]
-        private DateTime _modifiedDate;
+        private DateTime _modifiedDate = DateTime.Now;
     }
 }

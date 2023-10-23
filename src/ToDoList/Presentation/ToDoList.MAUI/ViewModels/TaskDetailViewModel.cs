@@ -64,7 +64,5 @@ namespace ToDoList.MAUI.ViewModels
             WeakReferenceMessenger.Default.Send(new MainPageMessage(new ToDoTaskMessage(ToDoTask, ListAction.Delete)));
             await Shell.Current.GoToAsync("..");
         }
-
-        // TODO: visszanyíl előtt mentsen
     }
 }

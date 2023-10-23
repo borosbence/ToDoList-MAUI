@@ -21,7 +21,8 @@ namespace ToDoList.MAUI.ViewModels
         }
 
         public ObservableCollection<ToDoTaskModel> Tasks { get; set; }
-        public bool IsFirstLoad { get; set; } = true;
+        [ObservableProperty]
+        public bool _isFirstLoad = true;
         [ObservableProperty]
         private bool _isRefreshing;
 

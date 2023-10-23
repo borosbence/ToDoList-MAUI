@@ -12,15 +12,23 @@
                      Order="Primary" Priority="1"
                      Command="{Binding LoadDataCommand}"/>
     </ContentPage.ToolbarItems>
-    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadDataCommand}">
-        <ScrollView>
-            <FlexLayout Wrap="Wrap"
-                    AlignItems="Start"
-                    AlignContent="Start"
-                    BindableLayout.ItemsSource="{Binding Tasks}"
-                    BindableLayout.ItemTemplate="{StaticResource ToDoListTmp}">
-            </FlexLayout>
-        </ScrollView>
-    </RefreshView>
+    <Grid>
+        <VerticalStackLayout ZIndex="1" IsVisible="{Binding IsFirstLoad}"
+                             HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
+            <ActivityIndicator IsRunning="True" />
+        </VerticalStackLayout>
+        <RefreshView ZIndex="0" IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding LoadDataCommand}">
+            <ScrollView>
+                <FlexLayout Wrap="Wrap"
+                AlignItems="Start"
+                AlignContent="Start"
+                BindableLayout.ItemsSource="{Binding Tasks}"
+                BindableLayout.ItemTemplate="{StaticResource ToDoListTmp}">
+                </FlexLayout>
+            </ScrollView>
+        </RefreshView>
+    </Grid>
+    
 
 </ContentPage>

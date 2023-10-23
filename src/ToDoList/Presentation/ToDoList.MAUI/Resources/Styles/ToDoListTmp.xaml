@@ -11,10 +11,9 @@
                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                           Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=ShowItemCommand}" />
                 </Grid.GestureRecognizers>
-                <Rectangle Margin="10" WidthRequest="148" HeightRequest="148">
+                <Rectangle Margin="10" WidthRequest="150" HeightRequest="150">
                     <Rectangle.Shadow>
-                        <Shadow Brush="Black" Radius="5" 
-                                Offset="6,6" Opacity="0.75" />
+                        <Shadow Brush="Black" Radius="5" Offset="6,6" Opacity="0.75" />
                     </Rectangle.Shadow>
                     <Rectangle.Style>
                         <Style TargetType="{x:Type Rectangle}">
@@ -37,10 +36,8 @@
                     </Rectangle.Style>
                 </Rectangle>
                 <VerticalStackLayout WidthRequest="140" HeightRequest="140" Spacing="5">
-                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1"
-                           TextColor="Black"/>
-                    <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="5"
-                           TextColor="Black"/>
+                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1"/>
+                    <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="5"/>
                 </VerticalStackLayout>
             </Grid>
         </AbsoluteLayout>

@@ -21,11 +21,7 @@
                 return false;
             }
             string? apiKey = _configuration.GetValue<string>(API_KEY_NAME);
-            if (apiKey == null || apiKey != userApiKey)
-            {
-                return false;
-            }
-            return true;
+            return apiKey == userApiKey;
         }
     }
 }
