@@ -11,9 +11,10 @@
                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                           Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=ShowItemCommand}" />
                 </Grid.GestureRecognizers>
-                <Rectangle Margin="10" WidthRequest="150" HeightRequest="150">
+                <Rectangle Margin="10" WidthRequest="148" HeightRequest="148">
                     <Rectangle.Shadow>
-                        <Shadow Brush="Black" Radius="5" Offset="6,6" Opacity="0.75" />
+                        <Shadow Brush="Black" Radius="5" 
+                                Offset="6,6" Opacity="0.75" />
                     </Rectangle.Shadow>
                     <Rectangle.Style>
                         <Style TargetType="{x:Type Rectangle}">
@@ -31,14 +32,31 @@
                                 <DataTrigger Binding="{Binding IsCompleted}" Value="True" TargetType="Rectangle">
                                     <Setter Property="Fill" Value="LightGray" />
                                 </DataTrigger>
+                                <DataTrigger Binding="{Binding IsCloseDL}" Value="True"  TargetType="Rectangle">
+                                    <Setter Property="Fill">
+                                        <Setter.Value>
+                                            <LinearGradientBrush>
+                                                <GradientStop Color="Salmon" Offset="0"/>
+                                                <GradientStop Color="Red" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Setter.Value>
+                                    </Setter>
+                                </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Rectangle.Style>
                 </Rectangle>
-                <VerticalStackLayout WidthRequest="140" HeightRequest="140" Spacing="5">
-                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1"/>
-                    <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="5"/>
-                </VerticalStackLayout>
+                <Grid WidthRequest="140" HeightRequest="140">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1" Grid.Row="0"/>
+                    <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="5" Grid.Row="1"/>
+                    <Label Text="{Binding DeadLine, StringFormat='{}{0:yyyy/MM/dd}'}" FontSize="10" Margin="0,5,0,0" Grid.Row="2" 
+                           VerticalOptions="End" HorizontalOptions="End"/>
+                </Grid>
             </Grid>
         </AbsoluteLayout>
     </DataTemplate>

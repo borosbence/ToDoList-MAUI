@@ -26,6 +26,10 @@
         <GradientStop Color="Yellow" Offset="1" />
     </LinearGradientBrush>
     <SolidColorBrush x:Key="isCompleted" Color="LightGray"  />
+    <LinearGradientBrush x:Key="closeDeadLine">
+        <GradientStop Color="Salmon" Offset="0" />
+        <GradientStop Color="Red" Offset="1" />
+    </LinearGradientBrush>
 
     <Style x:Key="detailsPage" TargetType="ContentPage" >
         <Style.Triggers>
@@ -34,6 +38,9 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding ToDoTask.IsCompleted}" TargetType="ContentPage" Value="True">
                 <Setter Property="Background" Value="{StaticResource isCompleted}"/>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding ToDoTask.IsCloseDL}" TargetType="ContentPage" Value="True">
+                <Setter Property="Background" Value="{StaticResource closeDeadLine}"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>

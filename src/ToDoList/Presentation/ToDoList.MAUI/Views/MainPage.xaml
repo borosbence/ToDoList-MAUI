@@ -17,18 +17,14 @@
                              HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <ActivityIndicator IsRunning="True" />
         </VerticalStackLayout>
-        <RefreshView ZIndex="0" IsRefreshing="{Binding IsRefreshing}"
-                     Command="{Binding LoadDataCommand}">
+        <RefreshView ZIndex="0" IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadDataCommand}">
             <ScrollView>
                 <FlexLayout Wrap="Wrap"
-                AlignItems="Start"
-                AlignContent="Start"
-                BindableLayout.ItemsSource="{Binding Tasks}"
-                BindableLayout.ItemTemplate="{StaticResource ToDoListTmp}">
+                    AlignItems="Start" AlignContent="Start"
+                    BindableLayout.ItemsSource="{Binding Tasks}"
+                    BindableLayout.ItemTemplate="{StaticResource ToDoListTmp}">
                 </FlexLayout>
             </ScrollView>
         </RefreshView>
     </Grid>
-    
-
 </ContentPage>

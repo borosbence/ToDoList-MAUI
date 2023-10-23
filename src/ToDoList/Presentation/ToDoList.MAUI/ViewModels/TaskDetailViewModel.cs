@@ -38,6 +38,7 @@ namespace ToDoList.MAUI.ViewModels
         [RelayCommand]
         private async Task SaveAsync()
         {
+            // TODO: új karakterek kicserélése /r/n
             bool exists = await _repository.ExistsByIdAsync(ToDoTask.Id);
             if (exists)
             {
@@ -64,5 +65,8 @@ namespace ToDoList.MAUI.ViewModels
             WeakReferenceMessenger.Default.Send(new MainPageMessage(new ToDoTaskMessage(ToDoTask, ListAction.Delete)));
             await Shell.Current.GoToAsync("..");
         }
+
+        // TODO: határidőt jelenítse meg, csak ha létezik
+        // TODO: szürke maradjon ha közel a határidő
     }
 }
