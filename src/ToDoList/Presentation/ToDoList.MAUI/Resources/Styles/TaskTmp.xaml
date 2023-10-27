@@ -7,13 +7,13 @@
         <Setter Property="Shell.BackgroundColor" Value="#EEE" />
     </Style>-->
 
-    <Style x:Key="titleStyle" TargetType="Entry">
+    <Style x:Key="titleEntry" TargetType="Entry">
         <Setter Property="FontSize" Value="18" />
         <Setter Property="FontAttributes" Value="Bold,Italic" />
     </Style>
-    <Style x:Key="contentStyle" TargetType="Editor">
+    <Style x:Key="contentEditor" TargetType="Editor">
         <Setter Property="FontSize" Value="16" />
-        <Setter Property="HeightRequest" Value="250" />
+        <Setter Property="HeightRequest" Value="300" />
         <Setter Property="AutoSize" Value="TextChanges" />
     </Style>
 
@@ -25,11 +25,15 @@
         <GradientStop Color="LightGoldenrodYellow" Offset="0" />
         <GradientStop Color="Yellow" Offset="1" />
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="isCompleted" Color="LightGray"  />
-    <LinearGradientBrush x:Key="closeDeadLine">
-        <GradientStop Color="Salmon" Offset="0" />
-        <GradientStop Color="Red" Offset="1" />
-    </LinearGradientBrush>
+    <SolidColorBrush x:Key="isCompleted" Color="LightGray" />
+
+    <Style x:Key="deadLinePicker" TargetType="DatePicker">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsCloseDL}" TargetType="DatePicker" Value="True" >
+                <Setter Property="BackgroundColor" Value="Red" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
 
     <Style x:Key="detailsPage" TargetType="ContentPage" >
         <Style.Triggers>
@@ -38,9 +42,6 @@
             </DataTrigger>
             <DataTrigger Binding="{Binding ToDoTask.IsCompleted}" TargetType="ContentPage" Value="True">
                 <Setter Property="Background" Value="{StaticResource isCompleted}"/>
-            </DataTrigger>
-            <DataTrigger Binding="{Binding ToDoTask.IsCloseDL}" TargetType="ContentPage" Value="True">
-                <Setter Property="Background" Value="{StaticResource closeDeadLine}"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>

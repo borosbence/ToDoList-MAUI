@@ -11,7 +11,7 @@ namespace ToDoList.Domain.Entities
         [StringLength(50)]
         public string Title { get; set; } = null!;
         [StringLength(500)]
-        public string Content { get; set; } = null!;
+        public string? Content { get; set; }
         public DateTime? DeadLine { get; set; }
         public bool IsCompleted { get; set; }
         public DateTime CreatedDate { get; set; } = DateTime.Now;

@@ -16,6 +16,7 @@
         <VerticalStackLayout ZIndex="1" IsVisible="{Binding IsFirstLoad}"
                              HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
             <ActivityIndicator IsRunning="True" />
+            <Label>Adatok betöltése...</Label>
         </VerticalStackLayout>
         <RefreshView ZIndex="0" IsRefreshing="{Binding IsRefreshing}" Command="{Binding LoadDataCommand}">
             <ScrollView>

@@ -3,7 +3,7 @@
     public interface IToDoTask : IEntity
     {
         string Title { get; set; }
-        string Content { get; set; }
+        string? Content { get; set; }
         DateTime? DeadLine { get; set; }
         bool IsCompleted { get; set; }
         DateTime CreatedDate { get; set; }

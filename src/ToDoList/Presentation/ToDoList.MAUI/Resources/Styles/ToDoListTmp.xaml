@@ -19,7 +19,7 @@
                     <Rectangle.Style>
                         <Style TargetType="{x:Type Rectangle}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsCompleted}" Value="False" TargetType="Rectangle">
+                                <DataTrigger Binding="{Binding IsCompleted}" TargetType="Rectangle" Value="False" >
                                     <Setter Property="Fill">
                                         <Setter.Value>
                                             <LinearGradientBrush>
@@ -29,18 +29,8 @@
                                         </Setter.Value>
                                     </Setter>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding IsCompleted}" Value="True" TargetType="Rectangle">
+                                <DataTrigger Binding="{Binding IsCompleted}" TargetType="Rectangle" Value="True" >
                                     <Setter Property="Fill" Value="LightGray" />
-                                </DataTrigger>
-                                <DataTrigger Binding="{Binding IsCloseDL}" Value="True"  TargetType="Rectangle">
-                                    <Setter Property="Fill">
-                                        <Setter.Value>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="Salmon" Offset="0"/>
-                                                <GradientStop Color="Red" Offset="1" />
-                                            </LinearGradientBrush>
-                                        </Setter.Value>
-                                    </Setter>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
@@ -54,8 +44,22 @@
                     </Grid.RowDefinitions>
                     <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1" Grid.Row="0"/>
                     <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="5" Grid.Row="1"/>
-                    <Label Text="{Binding DeadLine, StringFormat='{}{0:yyyy/MM/dd}'}" FontSize="10" Margin="0,5,0,0" Grid.Row="2" 
-                           VerticalOptions="End" HorizontalOptions="End"/>
+                    <Label Text="{Binding DeadLine, StringFormat='{}{0:yyyy/MM/dd}'}"
+                           FontSize="10" Margin="0,5,0,0" Grid.Row="2" 
+                           VerticalOptions="End" HorizontalOptions="End" IsVisible="False">
+                        <Label.Style>
+                            <Style TargetType="Label">
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding DeadLine}" TargetType="Label" Value="{x:Null}">
+                                        <Setter Property="IsVisible" Value="False" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding IsCloseDL}" TargetType="Label" Value="True" >
+                                        <Setter Property="TextColor" Value="Red" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Label.Style>
+                    </Label>
                 </Grid>
             </Grid>
         </AbsoluteLayout>

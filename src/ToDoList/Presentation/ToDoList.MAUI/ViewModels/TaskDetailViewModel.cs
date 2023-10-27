@@ -21,14 +21,15 @@ namespace ToDoList.MAUI.ViewModels
         private bool _hasDeadLine;
 
         [ObservableProperty]
-        private string _pageTitle;
+        private string? _pageTitle;
 
-        private ToDoTaskModel _toDoTask;
-        public ToDoTaskModel ToDoTask
+        private ToDoTaskModel _toDoTask = new();
+        public required ToDoTaskModel ToDoTask
         {
             get { return _toDoTask; }
             set
             {
+                value.Content = SetNewLines(value.Content);
                 SetProperty(ref _toDoTask, value);
                 HasDeadLine = ToDoTask.DeadLine != null;
                 PageTitle = ToDoTask.Id == 0 ? "Új jegyzet" : "Jegyzet módosítása";
@@ -38,7 +39,6 @@ namespace ToDoList.MAUI.ViewModels
         [RelayCommand]
         private async Task SaveAsync()
         {
-            // TODO: új karakterek kicserélése /r/n
             bool exists = await _repository.ExistsByIdAsync(ToDoTask.Id);
             if (exists)
             {
@@ -66,7 +66,12 @@ namespace ToDoList.MAUI.ViewModels
             await Shell.Current.GoToAsync("..");
         }
 
-        // TODO: határidőt jelenítse meg, csak ha létezik
-        // TODO: szürke maradjon ha közel a határidő
+        private string? SetNewLines(string? text)
+        {
+#if __MOBILE__
+            text?.Replace("\n", Environment.NewLine);
+#endif
+            return text;
+        }
     }
 }

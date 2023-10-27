@@ -8,9 +8,9 @@ namespace ToDoList.MAUI.Models
         [ObservableProperty]
         private int _id;
         [ObservableProperty]
-        private string _title;
+        private string _title = null!;
         [ObservableProperty]
-        private string _content;
+        private string? _content;
         [ObservableProperty]
         [NotifyPropertyChangedFor(nameof(IsCloseDL))]
         private DateTime? _deadLine;
@@ -21,6 +21,6 @@ namespace ToDoList.MAUI.Models
         [ObservableProperty]
         private DateTime _modifiedDate = DateTime.Now;
 
-        public bool IsCloseDL => DeadLine.HasValue && DeadLine.Value.Date <= DateTime.Now.Date.AddDays(3);
+        public bool IsCloseDL => !IsCompleted && DeadLine.HasValue && DeadLine.Value.Date <= DateTime.Now.Date.AddDays(3);
     }
 }

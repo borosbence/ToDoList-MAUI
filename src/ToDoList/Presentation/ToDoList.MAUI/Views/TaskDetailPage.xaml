@@ -20,13 +20,13 @@
                 <Label Text="{Binding ToDoTask.Id, Mode=OneWay}"/>
             </HorizontalStackLayout>
 
-            <Entry Placeholder="Cím" Text="{Binding ToDoTask.Title}" Style="{StaticResource titleStyle}"/>
-            <Editor Placeholder="Tartalom" Text="{Binding ToDoTask.Content}" Style="{StaticResource contentStyle}" />
+            <Entry Placeholder="Cím" Text="{Binding ToDoTask.Title}" Style="{StaticResource titleEntry}"/>
+            <Editor Placeholder="Tartalom" Text="{Binding ToDoTask.Content}" Style="{StaticResource contentEditor}"/>
 
             <HorizontalStackLayout>
                 <Label>Határidő:</Label>
                 <Switch IsToggled="{Binding HasDeadLine}" VerticalOptions="Center"/>
-                <DatePicker Date="{Binding ToDoTask.DeadLine}" VerticalOptions="Center" 
+                <DatePicker Date="{Binding ToDoTask.DeadLine}" VerticalOptions="Center" Style="{StaticResource deadLinePicker}"
                             IsEnabled="{Binding HasDeadLine}" IsVisible="{Binding HasDeadLine}"/>
             </HorizontalStackLayout>
 

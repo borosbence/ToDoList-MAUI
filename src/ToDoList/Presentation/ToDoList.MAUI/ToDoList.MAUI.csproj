@@ -10,6 +10,7 @@
 		<UseMaui>true</UseMaui>
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
 		<ApplicationTitle>Jegyzetek</ApplicationTitle>
@@ -33,10 +34,10 @@
 
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\task_list.svg" />
-
+		<MauiIcon Include="Resources\AppIcon\appicon.png" ForegroundScale="0.65" />
+		
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\appicon.png" ForegroundScale="0.5" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -46,6 +47,10 @@
 
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Splash\appicon.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -87,10 +92,6 @@
 
 	<ItemGroup>
 	  <Folder Include="Resources\Raw\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiImage Include="Resources\AppIcon\appicon.png" />
 	</ItemGroup>
 
 </Project>
