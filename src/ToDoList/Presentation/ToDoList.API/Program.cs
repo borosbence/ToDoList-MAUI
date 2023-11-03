@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
-using System.Net;
 using ToDoList.API.ApiKey;
 using ToDoList.Infrastructure.Data;
 
@@ -16,10 +15,14 @@ namespace ToDoList.API
 
             builder.Services.AddControllers();
 
+            string connString = builder.Configuration.GetConnectionString("ToDoDB") ?? string.Empty;
+            connString = connString.Trim();
+
             builder.Services.AddDbContext<ToDoDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("ToDoDB"),x =>
-                               x.MigrationsAssembly("ToDoList.Infrastructure")
-                                .EnableRetryOnFailure()));
+                options.UseMySql(connString,
+                    ServerVersion.AutoDetect(connString), x =>
+                    x.MigrationsAssembly("ToDoList.Infrastructure")
+                     .EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));
 
             builder.Services.AddSingleton<IApiKeyValidator, ApiKeyValidator>();
             builder.Services.AddSingleton<IAuthorizationFilter, ApiKeyAuthFilter>();
