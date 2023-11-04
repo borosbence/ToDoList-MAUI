@@ -16,7 +16,6 @@ namespace ToDoList.API
             builder.Services.AddControllers();
 
             string connString = builder.Configuration.GetConnectionString("ToDoDB") ?? string.Empty;
-            connString = connString.Trim();
 
             builder.Services.AddDbContext<ToDoDbContext>(options =>
                 options.UseMySql(connString,

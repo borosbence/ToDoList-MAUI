@@ -8,6 +8,7 @@ namespace ToDoList.MAUI.Messages
         Add,
         Delete
     }
+
     public class ToDoTaskMessage
     {
         public ToDoTaskMessage(ToDoTaskModel data, ListAction action = ListAction.Add)
@@ -18,6 +19,7 @@ namespace ToDoList.MAUI.Messages
         public ToDoTaskModel Data { get; set; }
         public ListAction Action { get; set; }
     }
+
     public class MainPageMessage : ValueChangedMessage<ToDoTaskMessage>
     {
         public MainPageMessage(ToDoTaskMessage value) : base(value)

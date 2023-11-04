@@ -4,7 +4,7 @@
              x:Class="ToDoList.MAUI.Views.TaskDetailPage"
              Title="{Binding PageTitle}" 
              Style="{StaticResource detailsPage}">
-    <ScrollView Orientation="Both">
+    <ScrollView>
         <VerticalStackLayout Margin="10">
             <VerticalStackLayout.Resources>
                 <Style TargetType="Label">
