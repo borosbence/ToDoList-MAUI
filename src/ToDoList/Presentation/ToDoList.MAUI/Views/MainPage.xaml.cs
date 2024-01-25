@@ -5,6 +5,7 @@ namespace ToDoList.MAUI.Views
     public partial class MainPage : ContentPage
     {
         private readonly MainViewModel _vm;
+
         public MainPage(MainViewModel vm)
         {
             _vm = vm;

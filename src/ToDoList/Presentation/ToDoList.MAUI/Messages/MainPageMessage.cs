@@ -9,20 +9,20 @@ namespace ToDoList.MAUI.Messages
         Delete
     }
 
-    public class ToDoTaskMessage
+    public class TaskMessage
     {
-        public ToDoTaskMessage(ToDoTaskModel data, ListAction action = ListAction.Add)
+        public TaskMessage(TaskModel data, ListAction action = ListAction.Add)
         {
             Data = data;
             Action = action;
         }
-        public ToDoTaskModel Data { get; set; }
+        public TaskModel Data { get; set; }
         public ListAction Action { get; set; }
     }
 
-    public class MainPageMessage : ValueChangedMessage<ToDoTaskMessage>
+    public class MainPageMessage : ValueChangedMessage<TaskMessage>
     {
-        public MainPageMessage(ToDoTaskMessage value) : base(value)
+        public MainPageMessage(TaskMessage value) : base(value)
         {
         }
     }

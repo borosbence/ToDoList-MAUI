@@ -37,10 +37,10 @@
 
     <Style x:Key="detailsPage" TargetType="ContentPage" >
         <Style.Triggers>
-            <DataTrigger Binding="{Binding ToDoTask.IsCompleted}" TargetType="ContentPage" Value="False">
+            <DataTrigger Binding="{Binding Task.IsCompleted}" TargetType="ContentPage" Value="False">
                 <Setter Property="Background" Value="{StaticResource nonCompletedFalse}"/>
             </DataTrigger>
-            <DataTrigger Binding="{Binding ToDoTask.IsCompleted}" TargetType="ContentPage" Value="True">
+            <DataTrigger Binding="{Binding Task.IsCompleted}" TargetType="ContentPage" Value="True">
                 <Setter Property="Background" Value="{StaticResource isCompleted}"/>
             </DataTrigger>
         </Style.Triggers>

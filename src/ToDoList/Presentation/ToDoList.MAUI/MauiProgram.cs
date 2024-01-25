@@ -27,14 +27,14 @@ namespace ToDoList.MAUI
             // const string localUrl = "http://localhost:5000";
             const string remoteUrl = "https://bbtodolist.azurewebsites.net/";
 
-            builder.Services.AddTransient<IGenericRepository<ToDoTaskModel>, GenericAPIRepository<ToDoTaskModel>>(x =>
+            builder.Services.AddTransient<IGenericRepository<TaskModel>, GenericAPIRepository<TaskModel>>(x =>
             {
                 return new(remoteUrl, "api/Tasks", new ApiKeyAuthHandler(apiKey));
             });
             builder.Services.AddSingleton<MainViewModel>();
             builder.Services.AddSingleton<MainPage>();
-            builder.Services.AddTransient<TaskDetailViewModel>();
-            builder.Services.AddTransient<TaskDetailPage>();
+            builder.Services.AddSingleton<TaskDetailViewModel>();
+            builder.Services.AddSingleton<TaskDetailPage>();
 
             return builder.Build();
         }

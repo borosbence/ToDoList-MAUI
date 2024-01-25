@@ -3,7 +3,7 @@ using ToDoList.Domain.Entities;
 
 namespace ToDoList.MAUI.Models
 {
-    public partial class ToDoTaskModel : ObservableObject, IToDoTask
+    public partial class TaskModel : ObservableObject, ITask
     {
         [ObservableProperty]
         private int _id;

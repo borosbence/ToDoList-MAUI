@@ -19,14 +19,14 @@ namespace ToDoList.API.Controllers
         }
         // GET: api/Tasks
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ToDoTask>>> GetAllTasks()
+        public async Task<ActionResult<IEnumerable<TaskEntity>>> GetAllTasks()
         {
             return await _context.Tasks.OrderByDescending(x => x.ModifiedDate).ToListAsync();
         }
 
         // GET: api/Tasks/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ToDoTask>> GetTask(int id)
+        public async Task<ActionResult<TaskEntity>> GetTask(int id)
         {
             var todoTask = await _context.Tasks.FirstOrDefaultAsync(x => x.Id == id);
             if (todoTask == null)
@@ -38,7 +38,7 @@ namespace ToDoList.API.Controllers
 
         // PUT: api/Tasks/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutTask(int id, ToDoTask todoTask)
+        public async Task<IActionResult> PutTask(int id, TaskEntity todoTask)
         {
             if (id != todoTask.Id)
             {
@@ -66,7 +66,7 @@ namespace ToDoList.API.Controllers
 
         // POST: api/Tasks
         [HttpPost]
-        public async Task<ActionResult<ToDoTask>> PostTask(ToDoTask todoTask)
+        public async Task<ActionResult<TaskEntity>> PostTask(TaskEntity todoTask)
         {
             _context.Tasks.Add(todoTask);
             await _context.SaveChangesAsync();

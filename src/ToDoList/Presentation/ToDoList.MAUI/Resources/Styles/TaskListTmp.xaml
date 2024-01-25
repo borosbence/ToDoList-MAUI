@@ -4,7 +4,7 @@
              xmlns:model="clr-namespace:ToDoList.MAUI.Models"
              xmlns:vm="clr-namespace:ToDoList.MAUI.ViewModels"
              x:Class="TeendokLista.MAUI.Resources.ListTemplate">
-    <DataTemplate x:Key="ToDoListTmp" x:DataType="model:ToDoTaskModel">
+    <DataTemplate x:Key="TaskListTmp" x:DataType="model:TaskModel">
         <AbsoluteLayout>
             <Grid>
                 <Grid.GestureRecognizers>

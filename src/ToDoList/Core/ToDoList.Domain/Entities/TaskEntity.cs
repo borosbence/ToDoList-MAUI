@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ToDoList.Domain.Entities
 {
     [Table("Tasks")]
-    public class ToDoTask : IToDoTask
+    public class TaskEntity : ITask
     {
         [Key]
         public int Id { get; set; }

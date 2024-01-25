@@ -23,7 +23,7 @@
                 <FlexLayout Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start"
                     BindableLayout.ItemsSource="{Binding Tasks}"
-                    BindableLayout.ItemTemplate="{StaticResource ToDoListTmp}">
+                    BindableLayout.ItemTemplate="{StaticResource TaskListTmp}">
                 </FlexLayout>
             </ScrollView>
         </RefreshView>

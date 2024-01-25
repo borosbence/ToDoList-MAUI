@@ -17,31 +17,31 @@
 
             <HorizontalStackLayout>
                 <Label>Azonosító:</Label>
-                <Label Text="{Binding ToDoTask.Id, Mode=OneWay}"/>
+                <Label Text="{Binding Task.Id, Mode=OneWay}"/>
             </HorizontalStackLayout>
 
-            <Entry Placeholder="Cím" Text="{Binding ToDoTask.Title}" Style="{StaticResource titleEntry}"/>
-            <Editor Placeholder="Tartalom" Text="{Binding ToDoTask.Content}" Style="{StaticResource contentEditor}"/>
+            <Entry Placeholder="Cím" Text="{Binding Task.Title}" Style="{StaticResource titleEntry}"/>
+            <Editor Placeholder="Tartalom" Text="{Binding Task.Content}" Style="{StaticResource contentEditor}"/>
 
             <HorizontalStackLayout>
                 <Label>Határidő:</Label>
                 <Switch IsToggled="{Binding HasDeadLine}" VerticalOptions="Center"/>
-                <DatePicker Date="{Binding ToDoTask.DeadLine}" VerticalOptions="Center" Style="{StaticResource deadLinePicker}"
+                <DatePicker Date="{Binding Task.DeadLine}" VerticalOptions="Center" Style="{StaticResource deadLinePicker}"
                             IsEnabled="{Binding HasDeadLine}" IsVisible="{Binding HasDeadLine}"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label>Teljesítve:</Label>
-                <Switch IsToggled="{Binding ToDoTask.IsCompleted}" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding Task.IsCompleted}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label>Létrehozás dátuma:</Label>
-                <Label Text="{Binding ToDoTask.CreatedDate, Mode=OneWay}"/>
+                <Label Text="{Binding Task.CreatedDate, Mode=OneWay}"/>
             </HorizontalStackLayout>
             <HorizontalStackLayout Margin="0,5,0,10">
                 <Label>Utoljára módosítva:</Label>
-                <Label Text="{Binding ToDoTask.ModifiedDate, Mode=OneWay}"/>
+                <Label Text="{Binding Task.ModifiedDate, Mode=OneWay}"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>

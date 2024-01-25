@@ -9,18 +9,17 @@ using ToDoList.MAUI.Views;
 
 namespace ToDoList.MAUI.ViewModels
 {
-    public partial class MainViewModel : ObservableObject
+    public partial class MainViewModel : ObservableRecipient, IRecipient<MainPageMessage>
     {
-        private readonly IGenericRepository<ToDoTaskModel> _repository;
+        private readonly IGenericRepository<TaskModel> _repository;
 
-        public MainViewModel(IGenericRepository<ToDoTaskModel> repository)
+        public MainViewModel(IGenericRepository<TaskModel> repository)
         {
             _repository = repository;
-            Tasks = new ObservableCollection<ToDoTaskModel>();
-            RegisterUpdate();
+            Tasks = new ObservableCollection<TaskModel>();
         }
 
-        public ObservableCollection<ToDoTaskModel> Tasks { get; set; }
+        public ObservableCollection<TaskModel> Tasks { get; set; }
         [ObservableProperty]
         public bool _isFirstLoad = true;
         [ObservableProperty]
@@ -41,11 +40,11 @@ namespace ToDoList.MAUI.ViewModels
         }
 
         [RelayCommand]
-        private async Task ShowItemAsync(ToDoTaskModel todoTask)
+        private async Task ShowItemAsync(TaskModel Task)
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Details", todoTask }
+                { "Details", Task }
             };
             await Shell.Current.GoToAsync(nameof(TaskDetailPage), navigationParameter);
         }
@@ -55,24 +54,22 @@ namespace ToDoList.MAUI.ViewModels
         {
             var navigationParameter = new Dictionary<string, object>
             {
-                { "Details", new ToDoTaskModel() }
+                { "Details", new TaskModel() }
             };
             await Shell.Current.GoToAsync(nameof(TaskDetailPage), navigationParameter);
         }
 
-        private void RegisterUpdate()
+        public void Receive(MainPageMessage message)
         {
-            WeakReferenceMessenger.Default.Register<MainPageMessage>(this, (r, m) =>
+            var mp_message = message.Value;
+            if (mp_message.Action == ListAction.Add && mp_message.Data.Id > 0)
             {
-                if (m.Value.Action == ListAction.Add && m.Value.Data.Id > 0)
-                {
-                    Tasks.Add(m.Value.Data);
-                }
-                else if (m.Value.Action == ListAction.Delete)
-                {
-                    Tasks.Remove(m.Value.Data);
-                }
-            });
+                Tasks.Add(mp_message.Data);
+            }
+            else if (mp_message.Action == ListAction.Delete)
+            {
+                Tasks.Remove(mp_message.Data);
+            }
         }
     }
 }

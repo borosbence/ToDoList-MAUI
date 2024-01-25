@@ -7,12 +7,12 @@ using ToDoList.MAUI.Models;
 
 namespace ToDoList.MAUI.ViewModels
 {
-    [QueryProperty("ToDoTask", "Details")]
-    public partial class TaskDetailViewModel : ObservableObject
+    [QueryProperty("Task", "Details")]
+    public partial class TaskDetailViewModel : ObservableRecipient
     {
-        private readonly IGenericRepository<ToDoTaskModel> _repository;
+        private readonly IGenericRepository<TaskModel> _repository;
 
-        public TaskDetailViewModel(IGenericRepository<ToDoTaskModel> repository)
+        public TaskDetailViewModel(IGenericRepository<TaskModel> repository)
         {
             _repository = repository;
         }
@@ -23,33 +23,33 @@ namespace ToDoList.MAUI.ViewModels
         [ObservableProperty]
         private string? _pageTitle;
 
-        private ToDoTaskModel _toDoTask = new();
-        public required ToDoTaskModel ToDoTask
+        private TaskModel _task = new();
+        public required TaskModel Task
         {
-            get { return _toDoTask; }
+            get { return _task; }
             set
             {
                 value.Content = SetNewLines(value.Content);
-                SetProperty(ref _toDoTask, value);
-                HasDeadLine = ToDoTask.DeadLine != null;
-                PageTitle = ToDoTask.Id == 0 ? "Új jegyzet" : "Jegyzet módosítása";
+                SetProperty(ref _task, value);
+                HasDeadLine = Task.DeadLine != null;
+                PageTitle = Task.Id == 0 ? "Új jegyzet" : "Jegyzet módosítása";
             }
         }
 
         [RelayCommand]
         private async Task SaveAsync()
         {
-            bool exists = await _repository.ExistsByIdAsync(ToDoTask.Id);
+            bool exists = await _repository.ExistsByIdAsync(Task.Id);
             if (exists)
             {
-                ToDoTask.ModifiedDate = DateTime.Now;
-                await _repository.UpdateAsync(ToDoTask.Id, ToDoTask);
+                Task.ModifiedDate = DateTime.Now;
+                await _repository.UpdateAsync(Task.Id, Task);
             }
             else
             {
-                int newId = await _repository.InsertAsync(ToDoTask);
-                ToDoTask.Id = newId;
-                WeakReferenceMessenger.Default.Send(new MainPageMessage(new ToDoTaskMessage(ToDoTask)));
+                int newId = await _repository.InsertAsync(Task);
+                Task.Id = newId;
+                Messenger.Send(new MainPageMessage(new TaskMessage(Task)));
             }
             await Shell.Current.GoToAsync("..");
         }
@@ -57,12 +57,12 @@ namespace ToDoList.MAUI.ViewModels
         [RelayCommand]
         private async Task DeleteAsync()
         {
-            bool exists = await _repository.ExistsByIdAsync(ToDoTask.Id);
+            bool exists = await _repository.ExistsByIdAsync(Task.Id);
             if (exists)
             {
-                await _repository.DeleteAsync(ToDoTask.Id);
+                await _repository.DeleteAsync(Task.Id);
             }
-            WeakReferenceMessenger.Default.Send(new MainPageMessage(new ToDoTaskMessage(ToDoTask, ListAction.Delete)));
+            Messenger.Send(new MainPageMessage(new TaskMessage(Task, ListAction.Delete)));
             await Shell.Current.GoToAsync("..");
         }
 

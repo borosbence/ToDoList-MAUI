@@ -69,8 +69,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Resources\Styles\ToDoListTmp.xaml.cs">
-	    <DependentUpon>ToDoListTmp.xaml</DependentUpon>
+	  <Compile Update="Resources\Styles\TaskListTmp.xaml.cs">
+	    <DependentUpon>TaskListTmp.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Resources\Styles\TaskTmp.xaml.cs">
 	    <DependentUpon>TaskTmp.xaml</DependentUpon>
@@ -81,7 +81,7 @@
 	  <MauiXaml Update="Resources\Styles\TaskTmp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Resources\Styles\ToDoListTmp.xaml">
+	  <MauiXaml Update="Resources\Styles\TaskListTmp.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\TaskDetailPage.xaml">

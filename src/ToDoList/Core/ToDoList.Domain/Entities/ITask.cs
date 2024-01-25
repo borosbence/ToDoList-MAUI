@@ -1,6 +1,6 @@
 ﻿namespace ToDoList.Domain.Entities
 {
-    public interface IToDoTask : IEntity
+    public interface ITask : IEntity
     {
         string Title { get; set; }
         string? Content { get; set; }

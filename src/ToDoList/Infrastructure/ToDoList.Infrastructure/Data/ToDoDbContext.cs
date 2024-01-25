@@ -10,11 +10,11 @@ namespace ToDoList.Infrastructure.Data
 
         }
 
-        public DbSet<ToDoTask> Tasks { get; set; } = null!;
+        public DbSet<TaskEntity> Tasks { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<ToDoTask>()
+            modelBuilder.Entity<TaskEntity>()
                 .HasIndex(t => t.Title)
                 .IsUnique();
         }
