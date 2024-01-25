@@ -1,4 +1,5 @@
-﻿using ToDoList.Application.Handlers;
+﻿using Microsoft.Extensions.Logging;
+using ToDoList.Application.Handlers;
 using ToDoList.Application.Repositories;
 using ToDoList.MAUI.Models;
 using ToDoList.MAUI.ViewModels;
@@ -18,6 +19,10 @@ namespace ToDoList.MAUI
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
 
             const string apiKey = "B3AAC4FA-2ACA-4040-AEC6-55FE96F4F31D";
             // const string localUrl = "http://localhost:5000";
