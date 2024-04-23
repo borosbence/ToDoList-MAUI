@@ -12,7 +12,7 @@
                     <TapGestureRecognizer CommandParameter="{Binding .}"
                                           Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=ShowItemCommand}"/>
                 </Grid.GestureRecognizers>
-                <Rectangle Margin="10" WidthRequest="208" HeightRequest="208">
+                <Rectangle Margin="10" WidthRequest="158" HeightRequest="158">
                     <Rectangle.Shadow>
                         <Shadow Brush="Black" Radius="5" Offset="6,6" Opacity="0.75"/>
                     </Rectangle.Shadow>
@@ -29,7 +29,7 @@
                         </Style>
                     </Rectangle.Style>
                 </Rectangle>
-                <Grid WidthRequest="200" HeightRequest="200">
+                <Grid WidthRequest="150" HeightRequest="150">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -37,7 +37,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1" Grid.Row="0"/>
-                    <BoxView HeightRequest="2" HorizontalOptions="Fill" Grid.Row="1" Margin="2 0"
+                    <BoxView HeightRequest="2" HorizontalOptions="Fill" Grid.Row="1" Margin="2,0"
                              BackgroundColor="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray100}}"/>
                     <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="10" Grid.Row="2"/>
                     <Label Text="{Binding DeadLine, StringFormat='{}{0:yyyy/MM/dd}'}"
