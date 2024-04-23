@@ -1,60 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:model="clr-namespace:ToDoList.MAUI.Models"
-             xmlns:vm="clr-namespace:ToDoList.MAUI.ViewModels"
-             x:Class="TeendokLista.MAUI.Resources.ListTemplate">
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"             
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"            
+    xmlns:model="clr-namespace:ToDoList.MAUI.Models"          
+    xmlns:vm="clr-namespace:ToDoList.MAUI.ViewModels"          
+    x:Class="TeendokLista.MAUI.Resources.ListTemplate">
     <DataTemplate x:Key="TaskListTmp" x:DataType="model:TaskModel">
         <AbsoluteLayout>
             <Grid>
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer CommandParameter="{Binding .}"
-                                          Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=ShowItemCommand}" />
+                                          Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=ShowItemCommand}"/>
                 </Grid.GestureRecognizers>
-                <Rectangle Margin="10" WidthRequest="148" HeightRequest="148">
+                <Rectangle Margin="10" WidthRequest="208" HeightRequest="208">
                     <Rectangle.Shadow>
-                        <Shadow Brush="Black" Radius="5" 
-                                Offset="6,6" Opacity="0.75" />
+                        <Shadow Brush="Black" Radius="5" Offset="6,6" Opacity="0.75"/>
                     </Rectangle.Shadow>
                     <Rectangle.Style>
                         <Style TargetType="{x:Type Rectangle}">
                             <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsCompleted}" TargetType="Rectangle" Value="False" >
-                                    <Setter Property="Fill">
-                                        <Setter.Value>
-                                            <LinearGradientBrush>
-                                                <GradientStop Color="LightGoldenrodYellow" Offset="0"/>
-                                                <GradientStop Color="Yellow" Offset="1" />
-                                            </LinearGradientBrush>
-                                        </Setter.Value>
-                                    </Setter>
+                                <DataTrigger Binding="{Binding IsCompleted}" TargetType="Rectangle" Value="False">
+                                    <Setter Property="Fill" Value="{AppThemeBinding Light={StaticResource NotCompletedLight}, Dark={StaticResource NotCompletedDark}}"/>
                                 </DataTrigger>
-                                <DataTrigger Binding="{Binding IsCompleted}" TargetType="Rectangle" Value="True" >
-                                    <Setter Property="Fill" Value="LightGray" />
+                                <DataTrigger Binding="{Binding IsCompleted}" TargetType="Rectangle" Value="True">
+                                    <Setter Property="Fill" Value="{AppThemeBinding Light={StaticResource CompletedLight}, Dark={StaticResource CompletedDark}}"/>
                                 </DataTrigger>
                             </Style.Triggers>
                         </Style>
                     </Rectangle.Style>
                 </Rectangle>
-                <Grid WidthRequest="140" HeightRequest="140">
+                <Grid WidthRequest="200" HeightRequest="200">
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
                     <Label Text="{Binding Title}" FontSize="16" FontAttributes="Bold,Italic" MaxLines="1" Grid.Row="0"/>
-                    <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="5" Grid.Row="1"/>
+                    <BoxView HeightRequest="2" HorizontalOptions="Fill" Grid.Row="1" Margin="2 0"
+                             BackgroundColor="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray100}}"/>
+                    <Label Text="{Binding Content}" FontSize="16" FontAttributes="Italic" MaxLines="10" Grid.Row="2"/>
                     <Label Text="{Binding DeadLine, StringFormat='{}{0:yyyy/MM/dd}'}"
-                           FontSize="10" Margin="0,5,0,0" Grid.Row="2" 
+                           FontSize="10" Margin="0,5,0,0" Grid.Row="3" 
                            VerticalOptions="End" HorizontalOptions="End" IsVisible="False">
                         <Label.Style>
                             <Style TargetType="Label">
                                 <Style.Triggers>
                                     <DataTrigger Binding="{Binding DeadLine}" TargetType="Label" Value="{x:Null}">
-                                        <Setter Property="IsVisible" Value="False" />
+                                        <Setter Property="IsVisible" Value="False"/>
                                     </DataTrigger>
                                     <DataTrigger Binding="{Binding IsCloseDL}" TargetType="Label" Value="True" >
-                                        <Setter Property="TextColor" Value="Red" />
+                                        <Setter Property="TextColor" Value="Red"/>
                                     </DataTrigger>
                                 </Style.Triggers>
                             </Style>
@@ -64,5 +60,4 @@
             </Grid>
         </AbsoluteLayout>
     </DataTemplate>
-
 </ResourceDictionary>

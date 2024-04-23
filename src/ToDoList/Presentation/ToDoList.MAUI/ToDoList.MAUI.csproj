@@ -14,7 +14,7 @@
 		<ApplicationTitle>Jegyzetek</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.todolist.maui</ApplicationId>
+		<ApplicationId>com.benzo.todolist</ApplicationId>
 		<ApplicationIdGuid>3899cd21-c6c8-4700-a00e-d0fc0708388d</ApplicationIdGuid>
 
 		<!-- Versions -->
@@ -47,14 +47,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Fonts\Segoe-Fluent-Icons.ttf" />
 	  <None Remove="Resources\Splash\appicon.svg" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="Resources\Images\add.png" />
-	  <None Include="Resources\Images\refresh.png" />
-	  <None Include="Resources\Images\save.png" />
-	  <None Include="Resources\Images\trash.png" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -88,15 +82,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Resources\Images\" />
 	  <Folder Include="Resources\Raw\" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.6" />
+	  <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.20" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.6" />
+	  <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.20" />
 	</ItemGroup>
 
 </Project>

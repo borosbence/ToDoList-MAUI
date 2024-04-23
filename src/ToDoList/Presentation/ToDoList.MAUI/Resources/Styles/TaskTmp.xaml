@@ -1,36 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ResourceDictionary xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="TeendokLista.MAUI.Resources.TaskTmp">
-
-    <!--<Style TargetType="Shell" ApplyToDerivedTypes="True">
-        <Setter Property="Shell.BackgroundColor" Value="#EEE" />
-    </Style>-->
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="TeendokLista.MAUI.Resources.TaskTmp">
 
     <Style x:Key="titleEntry" TargetType="Entry">
-        <Setter Property="FontSize" Value="18" />
-        <Setter Property="FontAttributes" Value="Bold,Italic" />
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="FontAttributes" Value="Bold,Italic"/>
     </Style>
     <Style x:Key="contentEditor" TargetType="Editor">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="HeightRequest" Value="300" />
-        <Setter Property="AutoSize" Value="TextChanges" />
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="HeightRequest" Value="300"/>
+        <Setter Property="AutoSize" Value="TextChanges"/>
     </Style>
 
     <Style x:Key="btnStyle" TargetType="Button">
-        <Setter Property="WidthRequest" Value="120" />
+        <Setter Property="WidthRequest" Value="120"/>
     </Style>
 
-    <LinearGradientBrush x:Key="nonCompletedFalse">
-        <GradientStop Color="LightGoldenrodYellow" Offset="0" />
-        <GradientStop Color="Yellow" Offset="1" />
+    <LinearGradientBrush x:Key="NotCompletedLight">
+        <GradientStop Color="LightGoldenrodYellow" Offset="0"/>
+        <GradientStop Color="Yellow" Offset="1"/>
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="isCompleted" Color="LightGray" />
+    <LinearGradientBrush x:Key="NotCompletedDark">
+        <GradientStop Color="Goldenrod" Offset="0"/>
+        <GradientStop Color="Brown" Offset="1"/>
+    </LinearGradientBrush>
+    <SolidColorBrush x:Key="CompletedLight" Color="LightGray"/>
+    <SolidColorBrush x:Key="CompletedDark" Color="DimGray"/>
 
     <Style x:Key="deadLinePicker" TargetType="DatePicker">
         <Style.Triggers>
             <DataTrigger Binding="{Binding IsCloseDL}" TargetType="DatePicker" Value="True" >
-                <Setter Property="BackgroundColor" Value="Red" />
+                <Setter Property="BackgroundColor" Value="Red"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>
@@ -38,10 +40,10 @@
     <Style x:Key="detailsPage" TargetType="ContentPage" >
         <Style.Triggers>
             <DataTrigger Binding="{Binding Task.IsCompleted}" TargetType="ContentPage" Value="False">
-                <Setter Property="Background" Value="{StaticResource nonCompletedFalse}"/>
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource NotCompletedLight}, Dark={StaticResource NotCompletedDark}}"/>
             </DataTrigger>
             <DataTrigger Binding="{Binding Task.IsCompleted}" TargetType="ContentPage" Value="True">
-                <Setter Property="Background" Value="{StaticResource isCompleted}"/>
+                <Setter Property="Background" Value="{AppThemeBinding Light={StaticResource CompletedLight}, Dark={StaticResource CompletedDark}}"/>
             </DataTrigger>
         </Style.Triggers>
     </Style>

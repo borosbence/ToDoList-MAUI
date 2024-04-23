@@ -45,13 +45,17 @@
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
-                <Button Text="Mentés" ImageSource="save.png" HorizontalOptions="Start"
-                        Style="{StaticResource btnStyle}"
-                        Command="{Binding SaveCommand}">
+                <Button Text="Mentés" HorizontalOptions="Start" Style="{StaticResource btnStyle}" Command="{Binding SaveCommand}">
+                    <Button.ImageSource>
+                        <FontImageSource Glyph="&#xe105;" FontFamily="SegoeFluentIcons" Size="20"
+                                         Color="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark=White}"/>
+                    </Button.ImageSource>
                 </Button>
-                <Button Text="Törlés" ImageSource="trash.png" HorizontalOptions="End"
-                        Background="Red" Style="{StaticResource btnStyle}"
-                        Command="{Binding DeleteCommand}">
+                <Button Text="Törlés" HorizontalOptions="End" Background="Red" Style="{StaticResource btnStyle}" Command="{Binding DeleteCommand}">
+                    <Button.ImageSource>
+                        <FontImageSource Glyph="&#xe107;" FontFamily="SegoeFluentIcons" Size="20"
+                                         Color="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark=White}"/>
+                    </Button.ImageSource>
                 </Button>
             </HorizontalStackLayout>
         </VerticalStackLayout>

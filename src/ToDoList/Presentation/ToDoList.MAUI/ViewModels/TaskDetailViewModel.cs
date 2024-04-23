@@ -32,7 +32,7 @@ namespace ToDoList.MAUI.ViewModels
                 value.Content = SetNewLines(value.Content);
                 SetProperty(ref _task, value);
                 HasDeadLine = Task.DeadLine != null;
-                PageTitle = Task.Id == 0 ? "Új jegyzet" : "Jegyzet módosítása";
+                PageTitle = Task.Id == 0 ? "Jegyzet létrehozása" : "Jegyzet módosítása";
             }
         }
 

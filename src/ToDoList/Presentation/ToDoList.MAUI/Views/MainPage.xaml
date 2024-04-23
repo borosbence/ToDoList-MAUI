@@ -5,12 +5,18 @@
              x:Class="ToDoList.MAUI.Views.MainPage"
              Title="Jegyzetek">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Új" IconImageSource="add.png"
-                     Order="Primary" Priority="0"
-                     Command="{Binding AddItemCommand}"/>
-        <ToolbarItem Text="Frissítés" IconImageSource="refresh.png"
-                     Order="Primary" Priority="1"
-                     Command="{Binding LoadDataCommand}"/>
+        <ToolbarItem Text="Új" Order="Primary" Priority="0" Command="{Binding AddItemCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xe109;" FontFamily="SegoeFluentIcons" Size="20"
+                                 Color="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark=White}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem Text="Frissítés" Order="Primary" Priority="1" Command="{Binding LoadDataCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource Glyph="&#xe149;" FontFamily="SegoeFluentIcons" Size="20"
+                                 Color="{AppThemeBinding Light={StaticResource PrimaryDarkText}, Dark=White}"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <Grid>
         <VerticalStackLayout ZIndex="1" IsVisible="{Binding IsFirstLoad}"
