@@ -4,11 +4,11 @@ using CommunityToolkit.Mvvm.Messaging;
 using ToDoList.Application.Repositories;
 using ToDoList.MAUI.Messages;
 using ToDoList.MAUI.Models;
+using sTask = System.Threading.Tasks;
 
 namespace ToDoList.MAUI.ViewModels
 {
-    [QueryProperty("Task", "Details")]
-    public partial class TaskDetailViewModel : ObservableRecipient
+    public partial class TaskDetailViewModel : ObservableValidator, IQueryAttributable
     {
         private readonly IGenericRepository<TaskModel> _repository;
 
@@ -23,22 +23,40 @@ namespace ToDoList.MAUI.ViewModels
         [ObservableProperty]
         private string? _pageTitle;
 
+        [ObservableProperty]
+        [NotifyPropertyChangedFor(nameof(IsNotLoading))]
+        private bool _isLoading;
+        public bool IsNotLoading => !IsLoading;
+
         private TaskModel _task = new();
         public required TaskModel Task
         {
             get { return _task; }
             set
             {
-                value.Content = SetNewLines(value.Content);
+                value.Content = value.Content?.ReplaceLineEndings();
                 SetProperty(ref _task, value);
+                OnPropertyChanged(nameof(Title));
                 HasDeadLine = Task.DeadLine != null;
-                PageTitle = Task.Id == 0 ? "Jegyzet létrehozása" : "Jegyzet módosítása";
             }
         }
 
-        [RelayCommand]
+        public string? Title
+        {
+            get => _task?.Title;
+            set 
+            {
+                SetProperty(_task.Title, value, _task, (o, n) => o.Title = n, true);
+                SaveCommand.NotifyCanExecuteChanged();
+            }
+        }
+
+        private bool CanSave() => !string.IsNullOrWhiteSpace(Title);
+
+        [RelayCommand(CanExecute = nameof(CanSave))]
         private async Task SaveAsync()
         {
+            IsLoading = true;
             bool exists = await _repository.ExistsByIdAsync(Task.Id);
             if (exists)
             {
@@ -49,8 +67,9 @@ namespace ToDoList.MAUI.ViewModels
             {
                 int newId = await _repository.InsertAsync(Task);
                 Task.Id = newId;
-                Messenger.Send(new MainPageMessage(new TaskMessage(Task)));
+                WeakReferenceMessenger.Default.Send(new MainPageMessage(new TaskMessage(Task)));
             }
+            IsLoading = false;
             await Shell.Current.GoToAsync("..");
         }
 
@@ -62,16 +81,14 @@ namespace ToDoList.MAUI.ViewModels
             {
                 await _repository.DeleteAsync(Task.Id);
             }
-            Messenger.Send(new MainPageMessage(new TaskMessage(Task, ListAction.Delete)));
+            WeakReferenceMessenger.Default.Send(new MainPageMessage(new TaskMessage(Task, ListAction.Delete)));
             await Shell.Current.GoToAsync("..");
         }
 
-        private string? SetNewLines(string? text)
+        public void ApplyQueryAttributes(IDictionary<string, object> query)
         {
-#if __MOBILE__
-            text?.Replace("\n", Environment.NewLine);
-#endif
-            return text;
+            Task = query["Details"] as TaskModel ?? new TaskModel();
+            PageTitle = Task.Id == 0 ? "Jegyzet létrehozása" : "Jegyzet módosítása";
         }
     }
 }

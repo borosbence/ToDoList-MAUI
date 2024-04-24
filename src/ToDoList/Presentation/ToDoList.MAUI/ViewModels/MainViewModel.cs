@@ -17,6 +17,7 @@ namespace ToDoList.MAUI.ViewModels
         {
             _repository = repository;
             Tasks = new ObservableCollection<TaskModel>();
+            RegisterMessages();
         }
 
         public ObservableCollection<TaskModel> Tasks { get; set; }
@@ -59,16 +60,22 @@ namespace ToDoList.MAUI.ViewModels
             await Shell.Current.GoToAsync(nameof(TaskDetailPage), navigationParameter);
         }
 
+        private void RegisterMessages()
+        {
+            WeakReferenceMessenger.Default.Register<MainPageMessage>(this);
+        }
+
         public void Receive(MainPageMessage message)
         {
             var mp_message = message.Value;
-            if (mp_message.Action == ListAction.Add && mp_message.Data.Id > 0)
+            var task  = mp_message.Data;
+            if (mp_message.Action == ListAction.Add && task.Id > 0)
             {
-                Tasks.Add(mp_message.Data);
+                Tasks.Add(task);
             }
             else if (mp_message.Action == ListAction.Delete)
             {
-                Tasks.Remove(mp_message.Data);
+                Tasks.Remove(task);
             }
         }
     }

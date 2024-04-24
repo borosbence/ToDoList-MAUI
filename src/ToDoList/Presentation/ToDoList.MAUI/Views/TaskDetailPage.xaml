@@ -20,19 +20,19 @@
                 <Label Text="{Binding Task.Id, Mode=OneWay}"/>
             </HorizontalStackLayout>
 
-            <Entry Placeholder="Cím" Text="{Binding Task.Title}" Style="{StaticResource titleEntry}"/>
-            <Editor Placeholder="Tartalom" Text="{Binding Task.Content}" Style="{StaticResource contentEditor}"/>
+            <Entry Placeholder="Cím" Text="{Binding Title}" Style="{StaticResource titleEntry}" MaxLength="50" IsReadOnly="{Binding IsLoading}"/>
+            <Editor Placeholder="Tartalom" Text="{Binding Task.Content}" Style="{StaticResource contentEditor}" MaxLength="500" IsReadOnly="{Binding IsLoading}"/>
 
             <HorizontalStackLayout>
                 <Label>Határidő:</Label>
-                <Switch IsToggled="{Binding HasDeadLine}" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding HasDeadLine}" IsEnabled="{Binding IsNotLoading}" VerticalOptions="Center"/>
                 <DatePicker Date="{Binding Task.DeadLine}" VerticalOptions="Center" Style="{StaticResource deadLinePicker}"
                             IsEnabled="{Binding HasDeadLine}" IsVisible="{Binding HasDeadLine}"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
                 <Label>Teljesítve:</Label>
-                <Switch IsToggled="{Binding Task.IsCompleted}" VerticalOptions="Center"/>
+                <Switch IsToggled="{Binding Task.IsCompleted}" IsEnabled="{Binding IsNotLoading}" VerticalOptions="Center"/>
             </HorizontalStackLayout>
 
             <HorizontalStackLayout>
