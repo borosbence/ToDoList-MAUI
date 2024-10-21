@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.EntityFrameworkCore;
 using ToDoList.API.ApiKey;
 using ToDoList.Infrastructure.Data;
+using ToDoList.API.Controllers;
 
 namespace ToDoList.API
 {
@@ -33,6 +34,8 @@ namespace ToDoList.API
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.MapTestEndpoints();
 
             app.Run();
         }

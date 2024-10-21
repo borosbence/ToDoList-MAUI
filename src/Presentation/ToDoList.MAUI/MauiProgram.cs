@@ -26,7 +26,7 @@ namespace ToDoList.MAUI
 #endif
 
             const string apiKey = "B3AAC4FA-2ACA-4040-AEC6-55FE96F4F31D";
-            // const string localUrl = "http://localhost:5000";
+            // const string localUrl = "http://localhost:5000/";
             const string remoteUrl = "https://bbtodolist.azurewebsites.net/";
 
             builder.Services.AddTransient<IGenericRepository<TaskModel>, GenericAPIRepository<TaskModel>>(x =>

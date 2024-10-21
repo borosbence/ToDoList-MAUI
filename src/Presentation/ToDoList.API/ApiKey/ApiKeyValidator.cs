@@ -8,6 +8,7 @@
     public class ApiKeyValidator : IApiKeyValidator
     {
         private readonly IConfiguration _configuration;
+
         public ApiKeyValidator(IConfiguration configuration)
         {
             _configuration = configuration;

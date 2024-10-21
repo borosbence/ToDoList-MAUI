@@ -1,0 +1,46 @@
+﻿# For more info on HTTP files go to https://aka.ms/vs/httpfile
+
+@ApiKey = B3AAC4FA-2ACA-4040-AEC6-55FE96F4F31D
+@TaskId = 6
+
+GET {{hostname}}/api/Test
+
+###
+
+GET {{hostname}}/api/Tasks
+X-Api-Key: {{ApiKey}}
+
+###
+
+GET {{hostname}}/api/Tasks/{{TaskId}}
+X-Api-Key: {{ApiKey}}
+
+###
+
+POST {{hostname}}/api/Tasks
+X-Api-Key: {{ApiKey}}
+Content-Type: application/json
+
+{
+  "title": "Cím 1",
+  "content": "Példa tartalom"
+}
+
+###
+
+PUT {{hostname}}/api/Tasks/{{TaskId}}
+X-Api-Key: {{ApiKey}}
+Content-Type: application/json
+
+{
+  "id": 6,
+  "title": "Cím 1",
+  "content": "Példa tartalom",
+  "createdDate": "2024-10-21T12:08:43.4008889+02:00",
+  "modifiedDate": "{{$datetime iso8601}}"
+}
+
+###
+
+DELETE {{hostname}}/api/Tasks/{{TaskId}}
+X-Api-Key: {{ApiKey}}

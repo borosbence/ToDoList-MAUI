@@ -17,6 +17,7 @@ namespace ToDoList.API.Controllers
         {
             _context = context;
         }
+
         // GET: api/Tasks
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskEntity>>> GetAllTasks()

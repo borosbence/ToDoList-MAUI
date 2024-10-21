@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.API", "Presentatio
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.MAUI", "Presentation\ToDoList.MAUI\ToDoList.MAUI.csproj", "{18D36F63-3D74-4F7C-8A06-865AB0F9C853}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Application", "Core\ToDoList.Application\ToDoList.Application.csproj", "{BFBCA421-D980-40F5-9ACF-BA9C03F23836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Application", "Core\ToDoList.Application\ToDoList.Application.csproj", "{BFBCA421-D980-40F5-9ACF-BA9C03F23836}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
