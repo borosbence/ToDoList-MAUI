@@ -4,40 +4,23 @@ using ToDoList.API.ApiKey;
 using ToDoList.Infrastructure.Data;
 using ToDoList.API.Controllers;
 
-namespace ToDoList.API
-{
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
+// Add services to the container.
+builder.Services.AddControllers();
+string connString = builder.Configuration.GetConnectionString("ToDoDB") ?? string.Empty;
+builder.Services.AddDbContext<ToDoDbContext>(options =>
+    options.UseMySql(connString,
+        ServerVersion.AutoDetect(connString), x =>
+        x.MigrationsAssembly("ToDoList.Infrastructure")
+            .EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));
+builder.Services.AddSingleton<IApiKeyValidator, ApiKeyValidator>();
+builder.Services.AddSingleton<IAuthorizationFilter, ApiKeyAuthFilter>();
 
-            builder.Services.AddControllers();
+var app = builder.Build();
 
-            string connString = builder.Configuration.GetConnectionString("ToDoDB") ?? string.Empty;
-
-            builder.Services.AddDbContext<ToDoDbContext>(options =>
-                options.UseMySql(connString,
-                    ServerVersion.AutoDetect(connString), x =>
-                    x.MigrationsAssembly("ToDoList.Infrastructure")
-                     .EnableRetryOnFailure(5, TimeSpan.FromSeconds(10), null)));
-
-            builder.Services.AddSingleton<IApiKeyValidator, ApiKeyValidator>();
-            builder.Services.AddSingleton<IAuthorizationFilter, ApiKeyAuthFilter>();
-
-            var app = builder.Build();
-
-            // Configure the HTTP request pipeline.
-
-            app.UseAuthorization();
-
-            app.MapControllers();
-
-            app.MapTestEndpoints();
-
-            app.Run();
-        }
-    }
-}
+// Configure the HTTP request pipeline.
+app.UseAuthorization();
+app.MapControllers();
+app.MapTestEndpoints();
+app.Run();
